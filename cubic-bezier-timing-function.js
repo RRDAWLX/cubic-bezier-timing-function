@@ -1,5 +1,5 @@
 /**
- * @function cubicBezierTiming 三次贝塞尔曲线函数生成器，根据点 P1，P2 以及精度 z，生成一条三次贝塞尔曲线的对应函数。
+ * @function cubicBezierTimingFunction 三次贝塞尔曲线函数生成器，根据点 P1，P2 以及精度 z，生成一条三次贝塞尔曲线的对应函数。
  * @param {number} x1 三次贝塞尔曲线中点 P1 的横坐标
  * @param {number} y1 三次贝塞尔曲线中点 P1 的纵坐标
  * @param {number} x2 三次贝塞尔曲线中点 P2 的横坐标
@@ -8,7 +8,7 @@
  * @return {function} 三次贝塞尔曲线对应的函数
  */
 
-function cubicBezierTiming(x1, y1, x2, y2, z = 0.001) {
+function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.001) {
 
     /**
      * @function yFn 三次贝塞尔曲线 y 坐标的函数。

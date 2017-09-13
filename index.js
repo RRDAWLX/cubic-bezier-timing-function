@@ -1,6 +1,6 @@
 let quadrate2 = document.querySelector('.quadrate2');
 
-let f = cubicBezierTiming(0.17, 0.61, 0, 0.93),
+let f = cubicBezierTimingFunction(0.86, 0.44, 0.14, 0.65),
     startTime = Date.now();
 console.log(`f(0): ${f(0)}, f(1): ${f(1)}`);
 function animate () {
