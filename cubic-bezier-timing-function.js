@@ -45,8 +45,8 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.001) {
      * @param {number} x 横坐标，x ∈ [0, 1]。
      * @return {number} 贝塞尔曲线的绘制比例 t。
      */
+    /* 用牛顿法求函数的近似解，可参考《人教版高中数学选修2-2》1.2导数的计算中的探究与发现“牛顿法——用导数方法求方程的近似解” */
     function resolveT(x) {
-        // 用牛顿法求函数的近似解，可参考《人教版高中数学选修2-2》1.2导数的计算中的探究与发现“牛顿法——用导数方法求方程的近似解”
         let x0, x1 = x,
             i = 0;
 
@@ -57,6 +57,34 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.001) {
 
         return x1;
     }
+
+    /* 公式法求三次方程的解 */
+    /*let a = 3 * x1 - 3 * x2 + 1,
+        b = 3 * x2 - 6 * x1,
+        c = 3 * x1;
+    function resolveT(x) {
+        let d = -x,
+            m = Math.pow(b, 2) / Math.pow(a, 2) - c / 2,
+            n = 3 * b * c / Math.pow(a, 2) - 2 * Math.pow(b, 3) / Math.pow(b, 3) - d / a,
+            u = m / 3,
+            v = n / 2,
+            u3 = Math.pow(u, 3),
+            v2 = Math.pow(v, 2),
+            v2_u3 = v2 - u3,
+            sqrt_v2_u3 = Math.pow(v2_u3, 1 / 2),
+            j = v + sqrt_v2_u3,
+            k = v - sqrt_v2_u3,
+            y = cbrt(v + sqrt_v2_u3) + cbrt(v - sqrt_v2_u3),
+            t = y - b / a;
+            return t;
+    }
+
+    function cbrt(num) {
+        if (num >= 0) {
+            return Math.pow(num, 1/3);
+        }
+        return -Math.pow(Math.abs(num), 1/3);
+    }*/
 
     /**
      * 三次贝塞尔曲线的函数，可根据给定的横坐标 x 求对应的纵坐标 y。
