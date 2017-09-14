@@ -1,6 +1,6 @@
 let quadrate2 = document.querySelector('.quadrate2');
 
-let f = cubicBezierTimingFunction(0.38, 0.13, 0, 0.57),
+let f = cubicBezierTimingFunction(0.1, 0.13, 0.43333, 0.57),
     startTime = Date.now();
 // coefficients(0.1, 0.43, 0.14, 0.65);
 console.log(`f(0): ${f(0)}, f(1): ${f(1)}`);

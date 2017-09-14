@@ -8,7 +8,7 @@
  * @return {function} 三次贝塞尔曲线对应的函数
  */
 
-function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.001) {
+function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.00001) {
 
     /**
      * @function yFn 三次贝塞尔曲线 y 坐标的函数。
@@ -46,7 +46,7 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.001) {
      * @return {number} 贝塞尔曲线的绘制比例 t。
      */
     /* 用牛顿法求函数的近似解，可参考《人教版高中数学选修2-2》1.2导数的计算中的探究与发现“牛顿法——用导数方法求方程的近似解” */
-    function resolveT(x) {
+    /*function resolveT(x) {
         let x0, x1 = x,
             i = 0;
 
@@ -56,6 +56,37 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.001) {
         } while (Math.abs((x1 - x0) / x0 > z));
 
         return x1;
+    }*/
+
+    /* 韦达定理求解 */
+    let a = 3 * x1 - 3 * x2 + 1,
+        b = 3 * x2 - 6 * x1,
+        c = 3 * x1;
+    console.log(`x1: ${x1}, x2: ${x2}`);
+    function resolveT(x) {
+        d = -x;
+
+        if (a == 0 && b == 0) {
+            return x / x1 / 3;
+        } else if (a == 0) {
+            let delta = c * c - 4 * b * d;
+            if (delta < 0) {
+                return 0;   // 误解
+            } else if (delta == 0) {
+                return - c / b / 2;
+            } else {
+                let root1 = (Math.sqrt(delta) - c) / b / 2,
+                    root2 = (-Math.sqrt(delta) - c) / b / 2
+                if (root1 >= 0 && root1 <= 1) {
+                    return root1;
+                }
+                return root2;
+            }
+        } else {
+            
+        }
+        // debugger;
+        return 0;
     }
 
     /* 公式法求三次方程的解 */
