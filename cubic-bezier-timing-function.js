@@ -66,24 +66,62 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z = 0.00001) {
     function resolveT(x) {
         d = -x;
 
-        if (a == 0 && b == 0) {
+        if (a === 0 && b === 0) {
             return x / x1 / 3;
-        } else if (a == 0) {
+        } else if (a === 0) {
             let delta = c * c - 4 * b * d;
             if (delta < 0) {
                 return 0;   // 误解
-            } else if (delta == 0) {
+            } else if (delta === 0) {
                 return - c / b / 2;
             } else {
                 let root1 = (Math.sqrt(delta) - c) / b / 2,
-                    root2 = (-Math.sqrt(delta) - c) / b / 2
+                    root2 = (-Math.sqrt(delta) - c) / b / 2;
                 if (root1 >= 0 && root1 <= 1) {
                     return root1;
                 }
                 return root2;
             }
         } else {
-            
+            let pow = Math.pow,
+                sqrt = Math.sqrt,
+                cbrt = Math.cbrt,
+                acos = Math.acos,
+                cos = Math.cos,
+                sin = Math.sin,
+                p = c / a - pow(b, 2) / ( 3 * pow(a, 2)),
+                q = d / a + (2 * pow(b, 3)) / (27 * pow(a, 3)) - (b * c) / (3 * pow(a, 2)),
+                delta = pow(q / 2, 2) + pow(p / 3, 3),
+                y1, y2, y3, x1, x2, x3;
+            if (delta > 0) {
+                y1 = cbrt(- q / 2 + sqrt(delta)) + cbrt(- q / 2 - sqrt(delta));
+                return y1 - b / (3 * a);
+            } else if (delta === 0) {
+                y1 = cbrt(- q / 2 + sqrt(delta)) + cbrt(- q / 2 - sqrt(delta));
+                x1 = y1 - b / (3 * a);
+                if (x1 >= 0 && x1 <= 1) {
+                    return x1;
+                } else {
+                    y2 = cbrt(q / 2);
+                    return y2 - b / (3 * a);
+                }
+            } else {
+                let alpha = acos(-3 * q * sqrt(-3 * p) / (2 * pow(p, 2)));
+                y1 = -2 * sqrt(-3 * p) / 3 * cos(alpha / 3);
+                x1 = y1 - b / (3 * a);
+                if (x1 >= 0 && x1 <= 1) {
+                    return x1;
+                }
+
+                y2 = -sqrt(-3 * p) / 3 *(cos(alpha/ 3) + cbrt(3) * sin(alpha / 3));
+                x2 = y2 - b / (3 * a);
+                if (x2 >= 0 && x2 <= 1) {
+                    return x2;
+                }
+
+                y3 = -sqrt(-3 * p) / 3 *(cos(alpha/ 3) - cbrt(3) * sin(alpha / 3));
+                return y3 - b / (3 * a);
+            }
         }
         // debugger;
         return 0;
