@@ -1,34 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>cubic bezier timing function</title>
 
-        <style>
-            * {
-                margin: 0; padding: 0;
-            }
-            .quadrate {
-                width: 100px; height: 100px; margin: 50px;
-            }
-            .quadrate1 {
-                background: green; animation: trans 1s cubic-bezier(0.1, 0.13, 0.43333, 0.57); animation-fill-mode: forwards;
-            }
+<head>
+  <meta charset="utf-8">
+  <title>cubic bezier timing function</title>
 
-            @keyframes trans {
-                0% {transform: translate3d(0, 0, 0);}
-                100% {transform: translate3d(600px, 0, 0);}
-            }
-            .quadrate2 {
-                background: red;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="quadrate quadrate1"></div>
-        <div class="quadrate quadrate2"></div>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-        <script src="./cubic-bezier-timing-function.js"></script>
-        <script src="./index.js"></script>
-    </body>
+    .quadrate {
+      width: 100px;
+      height: 100px;
+      margin: 50px;
+    }
+
+    .quadrate1 {
+      background: green;
+    }
+
+    @keyframes trans {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(600px, 0, 0);
+      }
+    }
+
+    .quadrate2 {
+      background: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quadrate quadrate1"></div>
+  <div class="quadrate quadrate2"></div>
+
+  <script src="./cubic-bezier-timing-function.js"></script>
+  <script src="./index.js"></script>
+</body>
+
 </html>
