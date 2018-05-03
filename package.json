@@ -1,0 +1,23 @@
+{
+  "name": "cubic-bezier-timing-function",
+  "version": "0.1.0",
+  "description": "cubic bezier timing function generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RRDAWLX/cubic-bezier-timing-function.git"
+  },
+  "keywords": [
+    "cubic",
+    "bezier"
+  ],
+  "author": "rrdawlx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RRDAWLX/cubic-bezier-timing-function/issues"
+  },
+  "homepage": "https://github.com/RRDAWLX/cubic-bezier-timing-function#readme"
+}

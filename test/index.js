@@ -1,12 +1,40 @@
+let quadrate1 = document.querySelector('.quadrate1'),
+  quadrate2 = document.querySelector('.quadrate2'),
+  x1 = Math.random().toPrecision(3),
+  y1 = Math.random().toPrecision(3),
+  x2 = Math.random().toPrecision(3),
+  y2 = Math.random().toPrecision(3),
+  duration = 1;   // 动画时长，单位 s。
+
+let f = cubicBezierTimingFunction(x1, y1, x2, y2),
+    startTime = Date.now();
+coefficients(x1, y1, x2, y2);
+console.log(`f(0): ${f(0)}, f(1): ${f(1)}`);
+
+quadrate1.style.animation = `trans ${duration}s cubic-bezier(${x1}, ${y1}, ${x2}, ${y2}) forwards`;
+animate();
+
+function animate () {
+    let x = (Date.now() - startTime) / (duration * 1000);
+    if (x > 1) {
+        x = 1;
+    }
+    let y = f(x);
+    console.log(x, y);
+    quadrate2.style = `transform: translate3d(${600 * y}px, 0, 0);`;
+
+    if (x < 1) {
+        requestAnimationFrame(animate);
+    }
+}
+
 /**
- * @function cubicBezierTimingFunction 三次贝塞尔曲线函数生成器，根据点 P1，P2 以及精度 z，生成一条三次贝塞尔曲线的对应函数。
- * @param {number} x1 三次贝塞尔曲线中点 P1 的横坐标
- * @param {number} y1 三次贝塞尔曲线中点 P1 的纵坐标
- * @param {number} x2 三次贝塞尔曲线中点 P2 的横坐标
- * @param {number} y2 三次贝塞尔曲线中点 P2 的纵坐标
- * @param {number} z 近似解的精度，默认值为 0.00001
- * @return {function} 三次贝塞尔曲线对应的函数
+ * @desc
  */
+function coefficients(x1, y1, x2, y2) {
+    console.log(`x1: ${x1}, y1: ${y1}, x2: ${x2}, y2: ${y2}`);
+    console.log(`x函数系数\n a: ${3 * x1 - 3 * x2 + 1}, b: ${3 * x2 - 6 * x1}, c: ${3 * x1}`);
+}
 
 function cubicBezierTimingFunction(x1, y1, x2, y2, z) {
     z = z || 0.00001;
@@ -73,7 +101,7 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z) {
         if (x >= 1) {
           return 1;
         }
-        
+
         return yFn(resolveT(x));
     };
 }
