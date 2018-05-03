@@ -1,6 +1,6 @@
 {
   "name": "cubic-bezier-timing-function",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "cubic bezier timing function generator",
   "main": "index.js",
   "scripts": {
