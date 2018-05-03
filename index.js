@@ -34,6 +34,4 @@ function animate () {
 function coefficients(x1, y1, x2, y2) {
     console.log(`x1: ${x1}, y1: ${y1}, x2: ${x2}, y2: ${y2}`);
     console.log(`x函数系数\n a: ${3 * x1 - 3 * x2 + 1}, b: ${3 * x2 - 6 * x1}, c: ${3 * x1}`);
-    console.log(`x函数导函数系数\n a: ${3 * (3 * x1 - 3 * x2 + 1)}, b: ${2 * (3 * x2 - 6 * x1)}, c: ${3 * x1}`);
-    // console.log(`delta: ${x1 * x1 + x2 * x2 - x1 * x2 - x1}`);
 }
