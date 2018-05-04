@@ -20,6 +20,7 @@ var presets = {
 function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
   var preset;
   if (typeof x1 === 'string') {
+    precision = y1;
     preset = presets[x1] || presets.linear;
     x1 = preset[0];
     y1 = preset[1];

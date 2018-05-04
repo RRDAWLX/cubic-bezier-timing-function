@@ -20,6 +20,7 @@ var presets = {
 function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
   var preset;
   if (typeof x1 === 'string') {
+    precision = y1;
     preset = presets[x1] || presets.linear;
     x1 = preset[0];
     y1 = preset[1];
@@ -114,13 +115,13 @@ let quadrate1 = document.querySelector('.quadrate1'),
   duration = 1;   // 动画时长，单位 s。
 
 // let f = cubicBezierTimingFunction(x1, y1, x2, y2),
-let f = cubicBezierTimingFunction('linear'),
+let f = cubicBezierTimingFunction('ease', 0.00001),
     startTime = Date.now();
 coefficients(x1, y1, x2, y2);
 console.log(`f(0): ${f(0)}, f(1): ${f(1)}`);
 
 // quadrate1.style.animation = `trans ${duration}s cubic-bezier(${x1}, ${y1}, ${x2}, ${y2}) forwards`;
-quadrate1.style.animation = `trans ${duration}s linear forwards`;
+quadrate1.style.animation = `trans ${duration}s ease forwards`;
 animate();
 
 function animate () {
