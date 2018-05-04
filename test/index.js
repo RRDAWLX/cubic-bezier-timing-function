@@ -7,17 +7,17 @@ var presets = {
 };
 
 /**
- * @function cubicBezierTimingFunction 三次贝塞尔曲线函数生成器，根据点 P1，P2 以及精度 z，生成一条三次贝塞尔曲线的对应函数。
+ * @function cubicBezierTimingFunction 三次贝塞尔曲线函数生成器，根据点 P1，P2 以及精度 precision，生成一条三次贝塞尔曲线的对应函数。
  * @param {string} x1 三次贝塞尔曲线预设值名，未匹配到则默认为 'linear'
  * @param {number} x1 三次贝塞尔曲线中点 P1 的横坐标
  * @param {number} y1 三次贝塞尔曲线中点 P1 的纵坐标
  * @param {number} x2 三次贝塞尔曲线中点 P2 的横坐标
  * @param {number} y2 三次贝塞尔曲线中点 P2 的纵坐标
- * @param {number} z 近似解的精度，默认值为 0.00001
+ * @param {number} precision 近似解的精度，默认值为 0.00001
  * @return {function} 三次贝塞尔曲线对应的函数
  */
 
-function cubicBezierTimingFunction(x1, y1, x2, y2, z) {
+function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
   var preset;
   if (typeof x1 === 'string') {
     preset = presets[x1] || presets.linear;
@@ -36,7 +36,7 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z) {
     }
   }
 
-  z = z || 0.00001;
+  precision = precision || 0.00001;
 
   var pow = Math.pow,
     abs = Math.abs;
@@ -77,7 +77,7 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, z) {
     while (left < right) {
       t = (left + right) / 2;
       approximateX = xFn(t);
-      if (abs(x - approximateX) < z) {
+      if (abs(x - approximateX) < precision) {
         return t;
       } else if (x < approximateX) {
         right = t;
