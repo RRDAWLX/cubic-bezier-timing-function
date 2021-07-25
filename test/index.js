@@ -1,4 +1,4 @@
-var presets = {
+let presets = {
   'linear': [0, 0, 1, 1],
   'ease': [0.25, 0.1, 0.25, 1],
   'ease-in': [0.42, 0, 1, 1],
@@ -18,10 +18,9 @@ var presets = {
  */
 
 function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
-  var preset;
   if (typeof x1 === 'string') {
     precision = y1;
-    preset = presets[x1] || presets.linear;
+    let preset = presets[x1] || presets.linear;
     x1 = preset[0];
     y1 = preset[1];
     x2 = preset[2];
@@ -39,8 +38,8 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
 
   precision = precision || 0.00001;
 
-  var pow = Math.pow,
-    abs = Math.abs;
+  let pow = Math.pow;
+  let abs = Math.abs;
 
   /**
    * @function yFn 三次贝塞尔曲线 y 坐标的函数。
@@ -70,10 +69,11 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
    * @return {number} 贝塞尔曲线的绘制比例 t。
    */
   function resolveT(x) {
-    var left = 0,
-      right = 1,
-      t,
-      approximateX;
+    let left = 0;
+    let right = 1;
+    let t;
+    let approximateX;
+
     // 夹逼法求t的近似解
     while (left < right) {
       t = (left + right) / 2;
@@ -106,42 +106,48 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
   };
 }
 
-let quadrate1 = document.querySelector('.quadrate1'),
-  quadrate2 = document.querySelector('.quadrate2'),
-  x1 = Math.random().toPrecision(3),
-  y1 = Math.random().toPrecision(3),
-  x2 = Math.random().toPrecision(3),
-  y2 = Math.random().toPrecision(3),
-  duration = 1;   // 动画时长，单位 s。
+let duration = 1;   // 动画时长，单位 s。
+let quadrate1 = document.querySelector('.quadrate1');
+let quadrate2 = document.querySelector('.quadrate2');
 
-// let f = cubicBezierTimingFunction(x1, y1, x2, y2),
-let f = cubicBezierTimingFunction('ease', 0.00001),
-    startTime = Date.now();
+// 方案一
+let x1 = Math.random().toPrecision(3);
+let y1 = Math.random().toPrecision(3);
+let x2 = Math.random().toPrecision(3);
+let y2 = Math.random().toPrecision(3);
+let f = cubicBezierTimingFunction(x1, y1, x2, y2);
+quadrate1.style.animation = `trans ${duration}s cubic-bezier(${x1}, ${y1}, ${x2}, ${y2}) forwards`;
 coefficients(x1, y1, x2, y2);
+
+// 方案二
+/* let predefine = Object.keys(presets).sort(() => Math.random() > 0.5 ? 1 : -1).pop();
+console.log(`predefine: ${predefine}`);
+let f = cubicBezierTimingFunction(predefine, 0.00001);
+quadrate1.style.animation = `trans ${duration}s ${predefine} forwards`; */
+
 console.log(`f(0): ${f(0)}, f(1): ${f(1)}`);
 
-// quadrate1.style.animation = `trans ${duration}s cubic-bezier(${x1}, ${y1}, ${x2}, ${y2}) forwards`;
-quadrate1.style.animation = `trans ${duration}s ease forwards`;
+let startTime = Date.now();
 animate();
 
-function animate () {
-    let x = (Date.now() - startTime) / (duration * 1000);
-    if (x > 1) {
-        x = 1;
-    }
-    let y = f(x);
-    console.log(x, y);
-    quadrate2.style = `transform: translate3d(${600 * y}px, 0, 0);`;
+function animate() {
+  let x = (Date.now() - startTime) / (duration * 1000);
+  if (x > 1) {
+    x = 1;
+  }
+  let y = f(x);
+  console.log(x, y);
+  quadrate2.style = `transform: translate3d(${600 * y}px, 0, 0);`;
 
-    if (x < 1) {
-        requestAnimationFrame(animate);
-    }
+  if (x < 1) {
+    requestAnimationFrame(animate);
+  }
 }
 
 /**
  * @desc
  */
 function coefficients(x1, y1, x2, y2) {
-    console.log(`x1: ${x1}, y1: ${y1}, x2: ${x2}, y2: ${y2}`);
-    console.log(`x函数系数\n a: ${3 * x1 - 3 * x2 + 1}, b: ${3 * x2 - 6 * x1}, c: ${3 * x1}`);
+  console.log(`x1: ${x1}, y1: ${y1}, x2: ${x2}, y2: ${y2}`);
+  console.log(`x函数系数\n a: ${3 * x1 - 3 * x2 + 1}, b: ${3 * x2 - 6 * x1}, c: ${3 * x1}`);
 }
