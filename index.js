@@ -16,8 +16,7 @@ const presets = {
  * @param {number} precision 近似解的精度，默认值为 1e-5
  * @return {function} 三次贝塞尔曲线对应的函数
  */
-
-function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
+export default function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
   if (typeof x1 === 'string') {
     precision = y1;
     let preset = presets[x1] || presets.linear;
@@ -142,5 +141,3 @@ function cubicBezierTimingFunction(x1, y1, x2, y2, precision) {
     return yFn(resolveT(x));
   };
 }
-
-module.exports = cubicBezierTimingFunction;
