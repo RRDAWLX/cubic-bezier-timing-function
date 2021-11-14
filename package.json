@@ -1,6 +1,6 @@
 {
   "name": "cubic-bezier-timing-function",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "cubic bezier timing function generator",
   "main": "dist/cbtf.common.js",
   "module": "dist/cbtf.esm.js",
